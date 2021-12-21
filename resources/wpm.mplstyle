@@ -1,0 +1,18 @@
+figure.figsize: 10, 10  # Size of graph
+
+font.family: Montserrat
+
+axes.linewidth: 2  # Width of border
+axes.labelpad: 15  # Padding on axis labels
+
+axes.edgecolor: ffe6ea  # Graph edge colour
+axes.facecolor: 4d4d80  # Graph colour
+axes.titlecolor: ffe6ea  # Main title colour
+axes.labelcolor: ffe6ea  # Axis labels colour
+
+axes.prop_cycle: cycler('color', ['E6A1CF', '14030F', 'ED2FAE', '5BBDBD', 'B2D6D6'])
+
+xtick.labelcolor: ffe6ea  # X axis label colour
+ytick.labelcolor: ffe6ea  # Y axis label colour
+
+figure.facecolor: 131626  # Outer colour
