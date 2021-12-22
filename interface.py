@@ -1,21 +1,27 @@
 # Main interface
-
 __author__ = "Matteo Golin"
 
 # Imports
 from typeTracker.tools.load import read_json, get_stats
-from typeTracker.tools.display import console_display_stats, console_display_all_time, graph_data
+from typeTracker.tools.display import console_display_all_time, graph_data
 from typeTracker.tools.modify import get_vals
+from typeTracker.inputs import get_user_choice
 
+# Loading in data
 dataset = read_json()
 stats, all_time_stats = get_stats(dataset)
 
-console_display_stats(stats, "Highest WPM Error Count")
-print()
-console_display_all_time(all_time_stats)
+# Main loop to continue
+quit_program = ""
+while quit_program.lower() != "q":
 
-headers = ("Date", "Average WPM")
-x_head, y_head = headers
+    # Console stat display
+    console_display_all_time(all_time_stats)
 
-values = get_vals(stats, x_head, y_head)
-graph_data(values, headers)
+    # Graphing display
+    x_head, y_head = get_user_choice()
+    values = get_vals(stats, x_head, y_head)
+    graph_data(values, (x_head, y_head))
+
+    # Prompt for continue
+    quit_program = input("Press enter to continue, Q to quit: ")

@@ -21,12 +21,14 @@ def fit_curve(x: list, y: list, deg: int) -> tuple[np.ndarray, np.ndarray]:
 
     """Returns the x and y points generate by a curve that fits the given x and y values."""
 
+    point_interval = 30 * len(x)
+
     if type(x[0]) == str:
         new_x = [_ for _ in range(len(x))]
-        curve_x = np.linspace(new_x[0], new_x[-1], 200)
+        curve_x = np.linspace(new_x[0], new_x[-1], point_interval)
         curve = np.polyfit(new_x, y, deg)
     else:
-        curve_x = np.linspace(x[0], x[-1], 200)  # Points generated for the curve to follow
+        curve_x = np.linspace(x[0], x[-1], point_interval)  # Points generated for the curve to follow
         curve = np.polyfit(x, y, deg)  # Curve equation
 
     curve_y = np.polyval(curve, curve_x)  # Y points
@@ -96,3 +98,16 @@ def console_display_all_time(all_time_stats: dict) -> None:
             print(f"{label}: {convert_time_str(all_time_stats[label])}")
         else:
             print(f"{label}: {all_time_stats[label]}")
+
+    print()
+
+
+def console_display_choices(choices: dict, x_or_y: str):
+
+    """Prints the choices for X and Y headers to the console."""
+
+    print(f"Enter the number associated with the {x_or_y} value you want plotted.")
+
+    for index in choices:
+        print(f"{index} - {choices[index]}")
+    print()

@@ -1,5 +1,4 @@
 # Functions for loading data
-
 __author__ = "Matteo Golin"
 
 # Imports
