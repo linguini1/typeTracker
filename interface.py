@@ -32,7 +32,7 @@ if arguments.xy:  # Command line mode
     x_head, y_head = X_OPTIONS[x_head], Y_OPTIONS[y_head]  # Get associated headers
 
     values = get_vals(stats, x_head, y_head)  # Get values to plot
-    graph_data(values, (x_head, y_head))  # Plot values
+    graph_data(values, (x_head, y_head), 1)  # Plot values
 
 else:  # Console interface mode
     # Main loop to continue
@@ -45,7 +45,7 @@ else:  # Console interface mode
         # Graphing display
         x_head, y_head = get_user_choice()  # Get user defined x and y values
         values = get_vals(stats, x_head, y_head)  # Get values to plot
-        graph_data(values, (x_head, y_head))  # Plot values
+        graph_data(values, (x_head, y_head), 1)  # Plot values
 
         # Prompt for continue
         quit_program = input("Press enter to continue, Q to quit: ")

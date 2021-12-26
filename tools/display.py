@@ -37,7 +37,7 @@ def fit_curve(x: list, y: list, deg: int) -> tuple[np.ndarray, np.ndarray]:
 
 
 # Graphing
-def graph_data(values: list[tuple], headers: tuple[str, str]):
+def graph_data(values: list[tuple], headers: tuple[str, str], deg: int):
 
     """
     Takes a list of tuples containing X and Y points in format (x, y), and plots them. Labels axes using
@@ -63,7 +63,7 @@ def graph_data(values: list[tuple], headers: tuple[str, str]):
     if UNITS.get(y_head) is not None:
         y_head += UNITS.get(y_head)
 
-    curve_x, curve_y = fit_curve(x_points, y_points, 1)  # Get curve
+    curve_x, curve_y = fit_curve(x_points, y_points, deg)  # Get curve
 
     plt.plot(x_points, y_points, 'o', curve_x, curve_y, '-')  # Plot data points and curve
 
