@@ -3,7 +3,7 @@ __author__ = "Matteo Golin"
 
 # Imports
 from tools.load import read_json, get_stats
-from tools.display import console_display_all_time, graph_data
+from tools.display import console_display_all_time, graph_data, console_display_choices
 from tools.modify import get_vals
 from tools.constants import X_OPTIONS, Y_OPTIONS
 from inputs import get_user_choice, parser
@@ -14,6 +14,16 @@ stats, all_time_stats = get_stats(dataset)
 
 # Parsing commandline
 arguments = parser.parse_args()
+
+
+# Display options
+if arguments.options:
+
+    console_display_choices(X_OPTIONS, "X")
+    console_display_choices(Y_OPTIONS, "Y")
+
+    if not arguments.xy:
+        quit()  # Avoids entering console interface
 
 
 if arguments.xy:  # Command line mode

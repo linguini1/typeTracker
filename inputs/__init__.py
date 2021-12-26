@@ -7,7 +7,7 @@ from tools.constants import X_OPTIONS, Y_OPTIONS
 from tools.display import console_display_choices
 
 
-# Custom class error
+# Custom classes
 class ValidateXY(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
 
@@ -20,17 +20,22 @@ class ValidateXY(argparse.Action):
 
 
 # Set up command line arguments
-command_line_desc = """Empty description."""
-help_desc = """Takes an index for an X and Y argument to be plotted."""
-parser = argparse.ArgumentParser(description=command_line_desc)
+help_desc = "Takes an index for an X and Y argument to be plotted."  # Header for help description
+parser = argparse.ArgumentParser()
 
-parser.add_argument(
+parser.add_argument(  # X and Y values
     "-xy",
     help=help_desc,
     nargs=2,
     metavar=("X", "Y"),
     type=int,
     action=ValidateXY
+    )
+
+parser.add_argument(  # Option display
+    "-options",
+    help="Displays the list of options for X and Y values that can be plotted.",
+    action="store_true"
     )
 
 
