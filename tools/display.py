@@ -5,8 +5,8 @@ __author__ = "Matteo Golin"
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.style as mplstyle
-from typeTracker.tools.modify import convert_time_str
-from typeTracker.tools.constants import LESSON_LABELS, ALL_TIME_LABELS
+from tools.modify import convert_time_str
+from tools.constants import LESSON_LABELS, ALL_TIME_LABELS
 
 # Constants
 STYLE_FILE = "./resources/wpm.mplstyle"

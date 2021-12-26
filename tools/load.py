@@ -3,8 +3,8 @@ __author__ = "Matteo Golin"
 
 # Imports
 import json
-from typeTracker.tools.constants import DATASET_LABELS, LESSON_LABELS, ALL_TIME_LABELS
-from typeTracker.tools.modify import convert_time_minutes
+from tools.constants import DATASET_LABELS, LESSON_LABELS, ALL_TIME_LABELS
+from tools.modify import convert_time_minutes
 
 # CONSTANTS
 FILENAME = "./resources/typing-data.json"

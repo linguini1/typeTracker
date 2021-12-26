@@ -4,7 +4,7 @@ __author__ = "Matteo Golin"
 # Imports
 import operator
 from datetime import datetime, timedelta
-from typeTracker.tools.constants import DATE_FORMAT, LESSON_LABELS, X_OPTIONS
+from tools.constants import DATE_FORMAT, LESSON_LABELS, X_OPTIONS
 
 
 # Modifying data
@@ -47,7 +47,7 @@ def get_x_vals(stats: dict, x_type: str, date_range: list[tuple]) -> list:
 
     """Gets the specified x value within a given date range."""
 
-    if x_type in X_OPTIONS.values() and x_type != X_OPTIONS["1"]:
+    if x_type in X_OPTIONS.values() and x_type != X_OPTIONS[1]:
         return [round(stats[date][x_type]) for date in date_range]
     else:  # Date
         return date_range
