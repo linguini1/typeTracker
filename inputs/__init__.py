@@ -38,6 +38,15 @@ parser.add_argument(  # Option display
     action="store_true"
     )
 
+parser.add_argument(
+    "-deg",
+    help="Specifies the degree of the curve used to interpolate the data.",
+    type=int,
+    nargs=1,
+    metavar="D",
+    default=1
+)
+
 
 # Getting desired values
 def get_x_y_value(choices: dict, x_or_y: str) -> int:
