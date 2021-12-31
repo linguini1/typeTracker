@@ -63,6 +63,36 @@ def get_x_y_value(choices: dict, x_or_y: str) -> int:
     return int(choice)
 
 
+# Getting degree
+def get_degree(n: int) -> int:
+
+    MAX = 4  # Maximum degree for polynomial interpolation
+    max_deg = min(MAX, n - 1)  # Max degree for polynomial interpolation based on number of data points (n - 1)
+
+    while True:
+
+        # Get degree
+        degree = input(f"Degree of polynomial between 1 and {max_deg} used to interpolate the data: ")
+
+        # Check if degree is an integer value
+        try:
+            degree = int(degree)
+            is_int = True  # Integer
+        except ValueError:
+            is_int = False  # Not an integer
+            print("The degree must be an integer.")
+
+        # Check if degree is within the range of 1 - max_deg
+        if is_int and (1 <= degree <= max_deg):
+            break
+        elif not is_int:
+            pass
+        else:
+            print(f"The degree must be between 1 and {max_deg}.")
+
+    return degree
+
+
 # Getting desired X and Y values
 def get_user_choice() -> tuple[str, str]:
 

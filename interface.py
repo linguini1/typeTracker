@@ -6,7 +6,7 @@ from tools.load import read_json, get_stats
 from tools.display import console_display_all_time, graph_data, console_display_choices
 from tools.modify import get_vals
 from tools.constants import X_OPTIONS, Y_OPTIONS
-from inputs import get_user_choice, parser
+from inputs import get_user_choice, parser, get_degree
 
 # Loading in data
 dataset = read_json()
@@ -45,7 +45,8 @@ else:  # Console interface mode
         # Graphing display
         x_head, y_head = get_user_choice()  # Get user defined x and y values
         values = get_vals(stats, x_head, y_head)  # Get values to plot
-        graph_data(values, (x_head, y_head), 1)  # Plot values
+        deg = get_degree(len(values))  # Get degree of polynomial to plot
+        graph_data(values, (x_head, y_head), deg)  # Plot values
 
         # Prompt for continue
         quit_program = input("Press enter to continue, Q to quit: ")
