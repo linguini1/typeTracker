@@ -50,7 +50,11 @@ def get_x_vals(stats: dict, x_type: str, date_range: list[tuple]) -> list:
     if x_type in X_OPTIONS.values() and x_type != X_OPTIONS[1]:
         return [round(stats[date][x_type]) for date in date_range]
     else:  # Date
-        return date_range
+
+        if len(date_range) > 10:  # Remove the year stamp
+            return [date[-5:] for date in date_range]
+        else:
+            return date_range
 
 
 def get_y_vals(stats: dict, y_type: str, date_range: list[tuple]) -> list:
