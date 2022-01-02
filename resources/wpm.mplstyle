@@ -1,4 +1,4 @@
-figure.figsize: 10, 10  # Size of graph
+figure.figsize: 18, 10  # Size of graph
 
 font.family: Montserrat
 
@@ -9,6 +9,9 @@ axes.edgecolor: ffe6ea  # Graph edge colour
 axes.facecolor: 4d4d80  # Graph colour
 axes.titlecolor: ffe6ea  # Main title colour
 axes.labelcolor: ffe6ea  # Axis labels colour
+axes.labelsize: 16  # Axis label size
+axes.titlesize: 24  # Axis title size
+axes.titlepad: 20  # Axis title padding
 
 axes.prop_cycle: cycler('color', ['E6A1CF', '14030F', 'ED2FAE', '5BBDBD', 'B2D6D6'])
 

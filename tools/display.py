@@ -2,9 +2,11 @@
 __author__ = "Matteo Golin"
 
 # Imports
+import matplotlib.pyplot
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.style as mplstyle
+from matplotlib.figure import Figure
 from tools.modify import convert_time_str
 from tools.constants import LESSON_LABELS, ALL_TIME_LABELS
 
@@ -64,6 +66,11 @@ def graph_data(values: list[tuple], headers: tuple[str, str], deg: int):
         y_head += UNITS.get(y_head)
 
     curve_x, curve_y = fit_curve(x_points, y_points, deg)  # Get curve
+
+    # Setting new icon
+    plt.figure("Type Tracker")  # Window label
+    manager = plt.get_current_fig_manager()
+    manager.window.wm_iconbitmap("resources/typetrackercap_icon.ico")
 
     plt.plot(x_points, y_points, 'o', curve_x, curve_y, '-')  # Plot data points and curve
 
