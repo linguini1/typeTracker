@@ -3,8 +3,7 @@ __author__ = "Matteo Golin"
 
 # Imports
 import argparse
-import re
-from tools.constants import X_OPTIONS, Y_OPTIONS
+from tools.constants import X_OPTIONS, Y_OPTIONS, ISO_PATTERN, MAX
 from tools.display import console_display_choices
 
 
@@ -17,6 +16,27 @@ class ValidateXY(argparse.Action):
         if X_OPTIONS[x] == Y_OPTIONS[y]:
             print(f"Got values {values}")
             raise ValueError("X and Y values cannot map to the same data!")
+        setattr(namespace, self.dest, values)
+
+
+class ValidateDeg(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+
+        if not 1 <= values <= MAX:
+            print(f"Got degree {values}")
+            raise ValueError(f"Degree must be between 1 and {MAX}")
+        setattr(namespace, self.dest, values)
+
+
+class ValidateRange(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+
+        lower, upper = values
+
+        if not (ISO_PATTERN.match(upper) and ISO_PATTERN.match(lower)):  # Must match specified date format
+            print(f"Got start date {lower} and end date {upper}.")
+            raise ValueError(f"Dates must be in format yyyy-mm-dd.")
+
         setattr(namespace, self.dest, values)
 
 
@@ -43,9 +63,19 @@ parser.add_argument(
     "-deg",
     help="Specifies the degree of the curve used to interpolate the data.",
     type=int,
-    nargs=1,
     metavar="D",
-    default=1
+    default=1,
+    action=ValidateDeg
+)
+
+parser.add_argument(
+    "-dr",
+    help="Specifies the date range from which to pull data. Default shows all data points.",
+    type=str,
+    metavar=("Sd", "Ed"),
+    default="all",
+    nargs=2,
+    action=ValidateRange
 )
 
 
@@ -67,7 +97,6 @@ def get_x_y_value(choices: dict, x_or_y: str) -> int:
 # Getting degree
 def get_degree(n: int) -> int:
 
-    MAX = 4  # Maximum degree for polynomial interpolation
     max_deg = min(MAX, n - 1)  # Max degree for polynomial interpolation based on number of data points (n - 1)
 
     while True:
@@ -118,9 +147,6 @@ def get_date_range(stats: dict) -> tuple[str, str] | str:
     print("Each individual date should be in the format yyyy-mm-dd (ex: 2021-01-01).")
     print("To use all available data points, please enter 'all'.")
 
-    # ISO date pattern
-    pattern = re.compile("^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
-
     while True:
 
         user_range = input("Date range: ")
@@ -134,12 +160,12 @@ def get_date_range(stats: dict) -> tuple[str, str] | str:
 
             print(lower, upper)
 
-            if pattern.match(upper) and pattern.match(lower):  # Must match specified date format
+            if ISO_PATTERN.match(upper) and ISO_PATTERN.match(lower):  # Must match specified date format
 
-                if upper in stats.keys() and lower in stats.keys():
+                if upper in stats.keys() or lower in stats.keys():
                     return lower, upper
                 else:
-                    print("Some of the range you specified is not encompassed by the data.")
+                    print("At least one of your dates must be present in the dataset.")
             else:
                 print("At least one of your dates was not in the right format of yyyy-mm-dd.")
 

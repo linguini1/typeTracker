@@ -35,8 +35,10 @@ def get_date_range(date_range: tuple[str, str]) -> list:
 
     """Creates the date range from the upper and lower date values."""
 
-    start_date = datetime.strptime(date_range[0], DATE_FORMAT)
-    end_date = datetime.strptime(date_range[1], DATE_FORMAT)
+    start_date, end_date = min(date_range), max(date_range)  # Sorts so earlier date is the lower range
+
+    start_date = datetime.strptime(start_date, DATE_FORMAT)
+    end_date = datetime.strptime(end_date, DATE_FORMAT)
     change_in_days = end_date - start_date
 
     return [datetime.strftime(start_date + timedelta(days=_), DATE_FORMAT) for _ in range(change_in_days.days + 1)]

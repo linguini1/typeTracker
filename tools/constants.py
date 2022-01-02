@@ -1,8 +1,14 @@
 # Important constants
 __author__ = "Matteo Golin"
 
+# Imports
+import re
+
 # Constants
 DATE_FORMAT = "%Y-%m-%d"  # ISO
+ISO_PATTERN = re.compile("^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")  # ISO regex pattern yyyy-mm-dd
+
+MAX = 4  # Maximum degree for polynomial interpolation
 
 DATASET_LABELS = [
     "timeStamp",
