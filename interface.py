@@ -6,7 +6,7 @@ from tools.load import read_json, get_stats
 from tools.display import console_display_all_time, graph_data, console_display_choices
 from tools.modify import get_vals
 from tools.constants import X_OPTIONS, Y_OPTIONS
-from inputs import get_user_choice, parser, get_degree
+from inputs import get_user_choice, parser, get_degree, get_date_range
 
 # Loading in data
 dataset = read_json()
@@ -44,7 +44,8 @@ else:  # Console interface mode
 
         # Graphing display
         x_head, y_head = get_user_choice()  # Get user defined x and y values
-        values = get_vals(stats, x_head, y_head)  # Get values to plot
+        date_range = get_date_range(stats)  # Get the range of dates from which to pull data
+        values = get_vals(stats, x_head, y_head, date_range=date_range)  # Get values to plot
         deg = get_degree(len(values))  # Get degree of polynomial to plot
         graph_data(values, (x_head, y_head), deg)  # Plot values
 

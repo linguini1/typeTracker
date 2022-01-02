@@ -31,7 +31,7 @@ def convert_time_str(minutes: float) -> str:
     return f"{int(hours):03d}:{int(minutes):02d}:{int(seconds):02d}"
 
 
-def get_date_range(date_range: tuple[str, str] | str) -> list:
+def get_date_range(date_range: tuple[str, str]) -> list:
 
     """Creates the date range from the upper and lower date values."""
 
@@ -50,11 +50,7 @@ def get_x_vals(stats: dict, x_type: str, date_range: list[tuple]) -> list:
     if x_type in X_OPTIONS.values() and x_type != X_OPTIONS[1]:
         return [round(stats[date][x_type]) for date in date_range]
     else:  # Date
-
-        if len(date_range) > 10:  # Remove the year stamp
-            return [date[-5:] for date in date_range]
-        else:
-            return date_range
+        return date_range
 
 
 def get_y_vals(stats: dict, y_type: str, date_range: list[tuple]) -> list:
@@ -92,6 +88,11 @@ def get_vals(stats: dict, x_type: str, y_type: str, date_range="all") -> list[tu
         date_list = get_date_range((lower, upper))  # List of all dates
     else:
         date_list = get_date_range(date_range)  # List of dates in the specified range
+
+    # Modifying date range to exclude dates with no information
+    available_dates = set(stats.keys())
+    date_list = available_dates.intersection(set(date_list))
+    date_list = sorted(date_list)
 
     x_vals = get_x_vals(stats, x_type, date_list)  # X
     y_vals = get_y_vals(stats, y_type, date_list)  # Y

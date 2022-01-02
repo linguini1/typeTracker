@@ -3,6 +3,7 @@ __author__ = "Matteo Golin"
 
 # Imports
 import argparse
+import re
 from tools.constants import X_OPTIONS, Y_OPTIONS
 from tools.display import console_display_choices
 
@@ -107,3 +108,41 @@ def get_user_choice() -> tuple[str, str]:
     y_choice = get_x_y_value(Y_OPTIONS, "Y")
 
     return X_OPTIONS[x_choice], Y_OPTIONS[y_choice]
+
+
+# Getting date range
+def get_date_range(stats: dict) -> tuple[str, str] | str:
+
+    # Prompt
+    print("Please enter the range of dates you want to plot data from in the format: <Start Date>, <End Date>")
+    print("Each individual date should be in the format yyyy-mm-dd (ex: 2021-01-01).")
+    print("To use all available data points, please enter 'all'.")
+
+    # ISO date pattern
+    pattern = re.compile("^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$")
+
+    while True:
+
+        user_range = input("Date range: ")
+
+        if user_range.lower() == "all":  # All data points available to be used
+            return user_range
+
+        # Unpack input
+        try:
+            lower, upper = user_range.replace(" ", "").split(",")
+
+            print(lower, upper)
+
+            if pattern.match(upper) and pattern.match(lower):  # Must match specified date format
+
+                if upper in stats.keys() and lower in stats.keys():
+                    return lower, upper
+                else:
+                    print("Some of the range you specified is not encompassed by the data.")
+            else:
+                print("At least one of your dates was not in the right format of yyyy-mm-dd.")
+
+        except ValueError:
+            print("Make sure you've entered your dates in the format: <Start Date>, <End Date>")
+

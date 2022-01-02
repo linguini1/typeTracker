@@ -2,13 +2,11 @@
 __author__ = "Matteo Golin"
 
 # Imports
-import matplotlib.pyplot
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.style as mplstyle
-from matplotlib.figure import Figure
 from tools.modify import convert_time_str
-from tools.constants import LESSON_LABELS, ALL_TIME_LABELS
+from tools.constants import LESSON_LABELS, ALL_TIME_LABELS, X_OPTIONS
 
 # Constants
 STYLE_FILE = "./resources/wpm.mplstyle"
@@ -56,7 +54,13 @@ def graph_data(values: list[tuple], headers: tuple[str, str], deg: int):
     x_points, y_points = [], []
     for value in values:
         x, y = value
-        x_points.append(x)
+
+        # Remove year from date stamp to prevent squishing
+        if headers[0] == X_OPTIONS[1] and len(values) > 10:
+            x_points.append(x[-5:])
+        else:
+            x_points.append(x)
+
         y_points.append(y)
 
     x_head, y_head = headers  # Axis labels
