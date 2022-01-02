@@ -17,5 +17,7 @@ axes.prop_cycle: cycler('color', ['E6A1CF', '14030F', 'ED2FAE', '5BBDBD', 'B2D6D
 
 xtick.labelcolor: ffe6ea  # X axis label colour
 ytick.labelcolor: ffe6ea  # Y axis label colour
+xtick.labelsize: 8  # X axis label size
+ytick.labelsize: 8  # Y axis label size
 
 figure.facecolor: 131626  # Outer colour
