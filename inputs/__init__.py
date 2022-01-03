@@ -128,13 +128,20 @@ def get_user_choice() -> tuple[str, str]:
 
     """Returns the headers for the x and y value choices as a tuple."""
 
-    # X
-    console_display_choices(X_OPTIONS, "X")
-    x_choice = get_x_y_value(X_OPTIONS, "X")
+    while True:
 
-    # Y
-    console_display_choices(Y_OPTIONS, "Y")
-    y_choice = get_x_y_value(Y_OPTIONS, "Y")
+        # X
+        console_display_choices(X_OPTIONS, "X")
+        x_choice = get_x_y_value(X_OPTIONS, "X")
+
+        # Y
+        console_display_choices(Y_OPTIONS, "Y")
+        y_choice = get_x_y_value(Y_OPTIONS, "Y")
+
+        if X_OPTIONS[x_choice] == Y_OPTIONS[y_choice]:
+            print("You cannot plot the same X and Y values.")
+        else:
+            break
 
     return X_OPTIONS[x_choice], Y_OPTIONS[y_choice]
 
