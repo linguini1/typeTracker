@@ -32,6 +32,11 @@ The following command will show the documentation for command line arguments.
 py interface.py -h
 ```
 
+### Example Plot
+The following image shows an example plot of my typing speed when I first started using Keybr.com. It plots my average 
+WPM against the date it was recorded, including a quadratic interpolation trend-line.
+![Example Plot](./docs/examplePlot.png)
+
 ### Console Interface Usage
 - When the program is run, the user's all-time statistics will be displayed.
 - The user will be prompted to select which values should be plotted along the X and Y axes.
