@@ -3,13 +3,16 @@ __author__ = "Matteo Golin"
 
 # Imports
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import numpy as np
+from datetime import datetime, date
 import matplotlib.style as mplstyle
 from tools.modify import convert_time_str
 from tools.constants import LESSON_LABELS, ALL_TIME_LABELS, X_OPTIONS
 
 # Constants
 STYLE_FILE = "./resources/wpm.mplstyle"
+ISO_DATE_FORMAT = "%Y-%m-%d"
 
 
 # Style plot
@@ -23,8 +26,8 @@ def fit_curve(x: list, y: list, deg: int) -> tuple[np.ndarray, np.ndarray]:
 
     point_interval = 30 * len(x)
 
-    if type(x[0]) == str:
-        new_x = [_ for _ in range(len(x))]
+    if type(x[0]) == date:
+        new_x = mdates.date2num(x)
         curve_x = np.linspace(new_x[0], new_x[-1], point_interval)
         curve = np.polyfit(new_x, y, deg)
     else:
@@ -55,9 +58,11 @@ def graph_data(values: list[tuple], headers: tuple[str, str], deg: int):
     for value in values:
         x, y = value
 
-        # Remove year from date stamp to prevent squishing
+        # Convert dates to datetime
         if headers[0] == X_OPTIONS[1] and len(values) > 10:
-            x_points.append(x[-5:])
+            x_points.append(
+                datetime.strptime(x, ISO_DATE_FORMAT).date()
+            )
         else:
             x_points.append(x)
 
