@@ -1,6 +1,6 @@
 figure.figsize: 18, 10  # Size of graph
 
-font.family: Montserrat
+font.family: JetBrains Mono
 
 axes.linewidth: 2  # Width of border
 axes.labelpad: 15  # Padding on axis labels
